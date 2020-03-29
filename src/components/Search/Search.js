@@ -10,6 +10,7 @@ class Search extends React.Component {
       query: window.location.pathname.split('/')[1],
       characters: [],
       selected: [],
+      loading: false,
     };
 
     this.textInput = React.createRef();
@@ -20,6 +21,7 @@ class Search extends React.Component {
 
     // Set the search to the value in the url
     if (this.state.query !== '') {
+      this.setState({ loading: true });
       const query = decodeURI(this.state.query);
       this.textInput.current.value = query;
       this.getCharacters(query);
@@ -27,6 +29,8 @@ class Search extends React.Component {
   }
 
   handleInputChange(event) {
+    this.setState({ loading: true });
+
     const query = event.target.value;
 
     /* eslint no-restricted-globals:0 */
@@ -38,7 +42,12 @@ class Search extends React.Component {
   render() {
     return (
       <div className="Search">
-        <input type="text" className="TextInput" ref={this.textInput} onChange={this.handleInputChange.bind(this)} />
+        <input
+          type="text"
+          className={`TextInput ${this.state.loading ? 'loading' : ''}`}
+          ref={this.textInput}
+          onChange={this.handleInputChange.bind(this)}
+        />
         <div className="SearchResultContainer">
           {this.state.characters.map(character => {
             const selected = this.state.selected.includes(character.id);
@@ -80,7 +89,7 @@ class Search extends React.Component {
    * to avoid sending too many requests to the api.
    * @param {string} name 
    */
-  async updateCharacters(name) {    
+  async updateCharacters(name) {
     // Cancel the old waiting request
     if (this.state.requestTimer) {
       clearTimeout(this.state.requestTimer);
@@ -101,6 +110,7 @@ class Search extends React.Component {
     try {
       const characters = await getCharacters(name);
       this.setState({ characters });
+      this.setState({ loading: false });
     } catch (e) {
       console.log(e);
     }

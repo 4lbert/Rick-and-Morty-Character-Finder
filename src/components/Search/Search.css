@@ -12,6 +12,10 @@
   border: none;
 }
 
+.loading {
+  opacity: 50%;
+}
+
 .SearchResultContainer {
   margin-top: 1rem;
   display: grid;
