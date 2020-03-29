@@ -20,7 +20,9 @@ class Search extends React.Component {
       <div>
         <p>Search for a character</p>
         <input type="text" />
-        {this.state.characters.map(character => <div>{character.name}</div>)}
+        {this.state.characters.map(character =>
+          <div key={character.name}>{character.name}</div>
+        )}
       </div>
     );
   }
