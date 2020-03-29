@@ -62,7 +62,11 @@ class Search extends React.Component {
             );
           })}
         </div>
-        <p>{this.state.selected.length} selected characters (<span className="reset" onClick={this.resetSelection.bind(this)}>reset</span>)</p>
+        <p>
+          {this.state.selected.length} selected characters
+          <br />
+          <span className="reset" onClick={this.resetState.bind(this)}>Reset app state</span>
+        </p>
       </div>
     );
   }
@@ -80,8 +84,15 @@ class Search extends React.Component {
     }
   }
 
-  resetSelection() {
+  resetState() {
+    this.setState({ query: '' });
+    this.setState({ characters: [] });
     this.setState({ selected: [] });
+    this.setState({ loading: false });
+
+    this.textInput.current.value = '';
+    /* eslint no-restricted-globals:0 */
+    history.pushState({}, undefined, '/');
   }
 
   /**
