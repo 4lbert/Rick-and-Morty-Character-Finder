@@ -17,7 +17,7 @@ export async function getCharacters(name) {
 
   const json = await response.json();
 
-  console.log(json);
+  const characters = json.data.characters.results;
 
-  return json;
+  return characters;
 }

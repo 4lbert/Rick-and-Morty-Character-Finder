@@ -12,7 +12,7 @@ class Search extends React.Component {
 
   async componentDidMount() {
     const characters = await getCharacters();
-    this.setState({ characters: JSON.stringify(characters, null, 2) });
+    this.setState({ characters });
   }
 
   render() {
@@ -20,7 +20,7 @@ class Search extends React.Component {
       <div>
         <p>Search for a character</p>
         <input type="text" />
-        <p>{this.state.characters}</p>
+        {this.state.characters.map(character => <div>{character.name}</div>)}
       </div>
     );
   }
