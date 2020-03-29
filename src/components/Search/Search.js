@@ -6,6 +6,7 @@ class Search extends React.Component {
     super(props);
     
     this.state = {
+      query: window.location.pathname.split('/')[1],
       characters: [],
     };
 
@@ -14,10 +15,22 @@ class Search extends React.Component {
 
   componentDidMount() {
     this.textInput.current.focus();
+
+    // Set the search to the value in the url
+    if (this.state.query !== '') {
+      const query = decodeURI(this.state.query);
+      this.textInput.current.value = query;
+      this.getCharacters(query);
+    }
   }
 
   handleInputChange(event) {
-    this.updateCharacters(event.target.value);
+    const query = event.target.value;
+
+    /* eslint no-restricted-globals:0 */
+    history.pushState({}, undefined, '/' + encodeURI(query));
+
+    this.updateCharacters(query);
   }
 
   render() {
@@ -37,7 +50,7 @@ class Search extends React.Component {
    * to avoid sending too many requests to the api.
    * @param {string} name 
    */
-  async updateCharacters(name) {
+  async updateCharacters(name) {    
     // Cancel the old waiting request
     if (this.state.requestTimer) {
       clearTimeout(this.state.requestTimer);
