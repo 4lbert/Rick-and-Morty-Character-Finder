@@ -1,4 +1,5 @@
 import React from 'react';
+import { getCharacters } from './../../services/characters';
 
 class Search extends React.Component {
   constructor(props) {
@@ -7,6 +8,10 @@ class Search extends React.Component {
     this.state = {
       characters: [],
     };
+  }
+
+  componentDidMount() {
+    getCharacters().then(chars => this.setState({ characters: JSON.stringify(chars, null, 2) }));
   }
 
   render() {
