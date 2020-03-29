@@ -10,8 +10,9 @@ class Search extends React.Component {
     };
   }
 
-  componentDidMount() {
-    getCharacters().then(chars => this.setState({ characters: JSON.stringify(chars, null, 2) }));
+  async componentDidMount() {
+    const characters = await getCharacters();
+    this.setState({ characters: JSON.stringify(characters, null, 2) });
   }
 
   render() {
