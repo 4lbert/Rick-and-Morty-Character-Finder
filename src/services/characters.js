@@ -1,7 +1,7 @@
 export async function getCharacters(name) {
   const query = `
     query {
-      characters(filter: { name: "rick" }) {
+      characters(filter: { name: "${name}" }) {
         results {
           name
         }

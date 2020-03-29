@@ -11,8 +11,12 @@ class Search extends React.Component {
   }
 
   async componentDidMount() {
-    const characters = await getCharacters();
-    this.setState({ characters });
+    try {
+      const characters = await getCharacters('morty');
+      this.setState({ characters });
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   render() {
