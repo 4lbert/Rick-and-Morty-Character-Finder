@@ -39,3 +39,9 @@
 .selected {
   opacity: 50%;
 }
+
+.reset {
+  cursor: pointer;
+  color: #cccccc;
+  text-decoration: underline;
+}

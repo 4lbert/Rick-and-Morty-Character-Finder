@@ -53,6 +53,7 @@ class Search extends React.Component {
             );
           })}
         </div>
+        <p>{this.state.selected.length} selected characters (<span className="reset" onClick={this.resetSelection.bind(this)}>reset</span>)</p>
       </div>
     );
   }
@@ -68,6 +69,10 @@ class Search extends React.Component {
       newSelection.push(id);
       this.setState({ selected: newSelection });
     }
+  }
+
+  resetSelection() {
+    this.setState({ selected: [] });
   }
 
   /**
