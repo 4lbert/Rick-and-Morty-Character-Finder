@@ -3,6 +3,7 @@ export async function getCharacters(name) {
     query {
       characters(filter: { name: "${name}" }) {
         results {
+          id
           name
         }
       }
