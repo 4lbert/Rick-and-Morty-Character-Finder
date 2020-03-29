@@ -26,7 +26,29 @@ class Search extends React.Component {
     );
   }
 
+  /**
+   * Function for getting the characters matching the query, but only after some time has passed
+   * to avoid sending too many requests to the api.
+   * @param {string} name 
+   */
   async updateCharacters(name) {
+    // Cancel the old waiting request
+    if (this.state.requestTimer) {
+      clearTimeout(this.state.requestTimer);
+    }
+
+    // Create a new request
+    const delayTimeMs = 150;
+    const requestTimer = setTimeout(() => this.getCharacters(name), delayTimeMs);
+    this.setState({ requestTimer });
+  }
+
+  /**
+   * Send the request for getting the matching characters and update the component's state when
+   * recieving the data.
+   * @param {string} name 
+   */
+  async getCharacters(name) {
     try {
       const characters = await getCharacters(name);
       this.setState({ characters });
