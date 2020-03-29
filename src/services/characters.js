@@ -1,4 +1,8 @@
 export async function getCharacters(name) {
+  if (name === '') {
+    return [];
+  }
+
   const query = `
     query {
       characters(filter: { name: "${name}" }) {
@@ -18,7 +22,12 @@ export async function getCharacters(name) {
 
   const json = await response.json();
 
-  const characters = json.data.characters.results;
+  let characters;
+  try {
+    characters = json.data.characters.results;
+  } catch (e) {
+    characters = [];
+  }
 
   return characters;
 }
