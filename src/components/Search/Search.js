@@ -10,25 +10,29 @@ class Search extends React.Component {
     };
   }
 
-  async componentDidMount() {
-    try {
-      const characters = await getCharacters('morty');
-      this.setState({ characters });
-    } catch (e) {
-      console.log(e);
-    }
+  handleInputChange(event) {
+    this.updateCharacters(event.target.value);
   }
 
   render() {
     return (
       <div>
         <p>Search for a character</p>
-        <input type="text" />
+        <input type="text" onChange={this.handleInputChange.bind(this)} />
         {this.state.characters.map(character =>
           <div key={character.name}>{character.name}</div>
         )}
       </div>
     );
+  }
+
+  async updateCharacters(name) {
+    try {
+      const characters = await getCharacters(name);
+      this.setState({ characters });
+    } catch (e) {
+      console.log(e);
+    }
   }
 }
 
