@@ -8,6 +8,12 @@ class Search extends React.Component {
     this.state = {
       characters: [],
     };
+
+    this.textInput = React.createRef();
+  }
+
+  componentDidMount() {
+    this.textInput.current.focus();
   }
 
   handleInputChange(event) {
@@ -18,7 +24,7 @@ class Search extends React.Component {
     return (
       <div>
         <p>Search for a character</p>
-        <input type="text" onChange={this.handleInputChange.bind(this)} />
+        <input type="text" ref={this.textInput} onChange={this.handleInputChange.bind(this)} />
         {this.state.characters.map(character =>
           <div key={character.id}>{character.name}</div>
         )}
