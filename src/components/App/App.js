@@ -8,7 +8,10 @@ class App extends React.Component {
     return (
       <div className="App">
         <img src={logo} className="App-logo" alt="logo" />
-        <Search />
+        <p>Find all your favorite Rick & Morty characters (as well as Morty)</p>
+        <div className="SearchContainer">
+          <Search />
+        </div>
       </div>
     );
   }

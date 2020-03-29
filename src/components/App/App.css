@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 1rem;
   font-size: 1rem;
   color: white;
 }
@@ -9,4 +10,9 @@
 .App-logo {
   height: 15vmin;
   pointer-events: none;
+}
+
+.SearchContainer {
+  width: 80%;
+  max-width: 800px;
 }

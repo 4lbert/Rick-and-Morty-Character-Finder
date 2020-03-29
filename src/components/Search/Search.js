@@ -1,4 +1,5 @@
 import React from 'react';
+import './Search.css';
 import { getCharacters } from './../../services/characters';
 
 class Search extends React.Component {
@@ -35,9 +36,8 @@ class Search extends React.Component {
 
   render() {
     return (
-      <div>
-        <p>Search for a character</p>
-        <input type="text" ref={this.textInput} onChange={this.handleInputChange.bind(this)} />
+      <div className="Search">
+        <input type="text" className="TextInput" ref={this.textInput} onChange={this.handleInputChange.bind(this)} />
         {this.state.characters.map(character =>
           <div key={character.id}>{character.name}</div>
         )}
