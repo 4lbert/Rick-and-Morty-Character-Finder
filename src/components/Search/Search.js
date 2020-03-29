@@ -38,9 +38,11 @@ class Search extends React.Component {
     return (
       <div className="Search">
         <input type="text" className="TextInput" ref={this.textInput} onChange={this.handleInputChange.bind(this)} />
-        {this.state.characters.map(character =>
-          <div key={character.id}>{character.name}</div>
-        )}
+        <div className="SearchResultContainer">
+          {this.state.characters.map(character =>
+            <div className="SearchResult" key={character.id}>{character.name}</div>
+          )}
+        </div>
       </div>
     );
   }
