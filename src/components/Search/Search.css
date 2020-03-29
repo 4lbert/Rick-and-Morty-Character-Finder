@@ -33,4 +33,9 @@
   align-items: center;
   color: #000000;
   padding: 0.5rem;
+  cursor: pointer;
+}
+
+.selected {
+  opacity: 50%;
 }
